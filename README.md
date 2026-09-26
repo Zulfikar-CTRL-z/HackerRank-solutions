@@ -27,18 +27,6 @@
 |:---:|:---:|
 | db2 | **18** |
 
-## 📂 Repository Structure
-
-```
-📦 coding-solutions/
-├── leetcode/
-│   ├── easy/
-│   ├── medium/
-│   └── hard/
-├── hackerrank/
-├── codechef/
-└── gfg/
-```
 
 ---
 
