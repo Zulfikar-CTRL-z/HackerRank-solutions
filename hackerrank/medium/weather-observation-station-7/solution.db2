@@ -6,5 +6,5 @@
     3. Type your code immediately after comment. Don't leave any blank line.
 */
 SELECT DISTINCT CITY 
-FROM STATION 
-WHERE LEFT(LOWER(CITY),1) IN ('a','e','i','o','u');
+FROM STATION
+WHERE RIGHT(LOWER(CITY),1) IN ('a','e','i','o','u');
