@@ -1,4 +1,4 @@
-# Weather Observation Station 6
+# Weather Observation Station 7
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -22,7 +22,7 @@ where *LAT\_N* is the northern latitude and *LONG\_W* is the western longitude.
 **Language:** db2  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-26T19:57:52.034Z  
+**Submitted:** 2026-09-26T19:59:35.438Z  
 
 ```db2
 
@@ -33,8 +33,8 @@ where *LAT\_N* is the northern latitude and *LONG\_W* is the western longitude.
     3. Type your code immediately after comment. Don't leave any blank line.
 */
 SELECT DISTINCT CITY 
-FROM STATION 
-WHERE LEFT(LOWER(CITY),1) IN ('a','e','i','o','u');
+FROM STATION
+WHERE RIGHT(LOWER(CITY),1) IN ('a','e','i','o','u');
 
 ```
 
