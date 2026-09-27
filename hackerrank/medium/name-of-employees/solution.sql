@@ -1,7 +1,6 @@
 /*
 Enter your query here.
 */
-SELECT NAME 
-FROM STUDENTS
-WHERE MARKS>75
-ORDER BY RIGHT(NAME,3), ID ASC;
+SELECT name 
+FROM Employee
+ORDER BY name ASC;
