@@ -1,4 +1,4 @@
-# Top Earners
+# Weather Observation Station 2
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -34,15 +34,14 @@ where $lat$ is the sum of all values in *LAT\_N* and $lon$ is the sum of all val
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-27T20:33:28.263Z  
+**Submitted:** 2026-09-27T20:37:11.945Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT MAX(salary*months), COUNT(*)
-FROM Employee
-WHERE salary*months =(SELECT MAX(salary*months)FROM Employee);
+SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2)
+From STATION;
 
 ```
 
