@@ -1,4 +1,4 @@
-# Revising Aggregations - The Sum Function
+# Revising Aggregations - Averages
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -21,12 +21,12 @@ The **CITY** table is described as follows:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-27T17:00:03.956Z  
+**Submitted:** 2026-09-27T17:01:21.914Z  
 
 ```sql
-SELECT SUM(POPULATION) 
+SELECT AVG(POPULATION)
 FROM CITY
-WHERE DISTRICT ='California';
+WHERE DISTRICT = 'California';
 
 ```
 
