@@ -1,6 +1,5 @@
 /*
 Enter your query here.
 */
-SELECT MAX(salary*months), COUNT(*)
-FROM Employee
-WHERE salary*months =(SELECT MAX(salary*months)FROM Employee);
+SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2)
+From STATION;
