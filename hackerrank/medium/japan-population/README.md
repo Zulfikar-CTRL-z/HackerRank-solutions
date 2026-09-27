@@ -1,4 +1,4 @@
-# Employee Salaries
+# Average Population
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -19,17 +19,11 @@ The **CITY** table is described as follows:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-27T14:39:43.509Z  
+**Submitted:** 2026-09-27T17:04:08.082Z  
 
 ```sql
-/*
-Enter your query here.
-*/
-
-SELECT name 
-FROM Employee
-WHERE salary > 2000 AND months <10
-ORDER BY employee_id ASC;
+SELECT FLOOR(AVG(POPULATION))
+FROM CITY;
 
 ```
 
