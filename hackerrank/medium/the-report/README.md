@@ -1,4 +1,4 @@
-# Average Population of Each Continent
+# The Report
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -61,16 +61,33 @@ So, the following students got <em>8</em>, <em>9</em> or <em>10</em> grades:
 
 ## Solution
 
-**Language:** SQL  
+**Language:** db2  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-29T18:20:22.513Z  
+**Submitted:** 2026-09-30T14:15:52.917Z  
 
-```sql
-SELECT COUNTRY.CONTINENT, FLOOR(AVG(CITY.Population))
-FROM CITY
-JOIN COUNTRY ON COUNTRY.Code=CITY.CountryCode
-GROUP BY COUNTRY.CONTINENT;
+```db2
+
+/*
+    Enter your query here and follow these instructions:
+    1. Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+    2. The AS keyword causes errors, so follow this convention: "Select t.Field From table1 t" instead of "select t.Field From table1 AS t"
+    3. Type your code immediately after comment. Don't leave any blank line.
+*/
+
+SELECT 
+    CASE 
+        WHEN Grades.Grade < 8 THEN 'NULL' 
+        ELSE Students.Name 
+    END AS StudentName,
+    Grades.Grade,
+    Students.Marks
+FROM 
+    Students, Grades 
+WHERE 
+    Students.Marks >= Grades.Min_mark AND Students.Marks <= Grades.Max_mark 
+ORDER BY 
+    Grades.Grade DESC, Students.Name;
 
 ```
 
