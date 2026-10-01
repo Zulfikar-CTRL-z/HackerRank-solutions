@@ -1,4 +1,4 @@
-# The Report
+# Weather Observation Station 20
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -30,33 +30,23 @@ The following tables contain contest data:
 
 ## Solution
 
-**Language:** db2  
+**Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-30T14:15:59.139Z  
+**Submitted:** 2026-10-01T14:25:46.694Z  
 
-```db2
-
+```sql
 /*
-    Enter your query here and follow these instructions:
-    1. Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
-    2. The AS keyword causes errors, so follow this convention: "Select t.Field From table1 t" instead of "select t.Field From table1 AS t"
-    3. Type your code immediately after comment. Don't leave any blank line.
+Enter your query here.
 */
-
-SELECT 
-    CASE 
-        WHEN Grades.Grade < 8 THEN 'NULL' 
-        ELSE Students.Name 
-    END AS StudentName,
-    Grades.Grade,
-    Students.Marks
-FROM 
-    Students, Grades 
-WHERE 
-    Students.Marks >= Grades.Min_mark AND Students.Marks <= Grades.Max_mark 
-ORDER BY 
-    Grades.Grade DESC, Students.Name;
+WITH Numbered AS (
+  SELECT LAT_N, ROW_NUMBER() OVER (ORDER BY LAT_N) AS rn,
+         COUNT(*) OVER () AS total
+  FROM STATION
+)
+SELECT ROUND(AVG(LAT_N), 4) AS median
+FROM Numbered
+WHERE rn IN (FLOOR((total + 1) / 2.0), CEIL((total + 1) / 2.0));
 
 ```
 
