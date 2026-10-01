@@ -1,7 +1,7 @@
 /*
 Enter your query here.
 */
-SELECT REPEAT('* ', 21 - n)
+SELECT REPEAT('* ', n)
 FROM (
     SELECT 1 AS n
     UNION ALL SELECT 2
