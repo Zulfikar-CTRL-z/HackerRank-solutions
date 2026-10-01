@@ -1,4 +1,4 @@
-# Draw The Triangle 2
+# Print Prime Numbers
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -26,36 +26,27 @@ For example, the output for all prime numbers $\leq 10$ would be:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-01T14:34:46.478Z  
+**Submitted:** 2026-10-01T14:37:31.314Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT REPEAT('* ', n)
-FROM (
-    SELECT 1 AS n
-    UNION ALL SELECT 2
-    UNION ALL SELECT 3
-    UNION ALL SELECT 4
-    UNION ALL SELECT 5
-    UNION ALL SELECT 6
-    UNION ALL SELECT 7
-    UNION ALL SELECT 8
-    UNION ALL SELECT 9
-    UNION ALL SELECT 10
-    UNION ALL SELECT 11
-    UNION ALL SELECT 12
-    UNION ALL SELECT 13
-    UNION ALL SELECT 14
-    UNION ALL SELECT 15
-    UNION ALL SELECT 16
-    UNION ALL SELECT 17
-    UNION ALL SELECT 18
-    UNION ALL SELECT 19
-    UNION ALL SELECT 20
-) AS t
-ORDER BY n;
+WITH RECURSIVE nums AS (
+    SELECT 2 AS n
+    UNION ALL
+    SELECT n + 1
+    FROM nums
+    WHERE n < 1000
+)
+SELECT GROUP_CONCAT(n SEPARATOR '&')
+FROM nums a
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM nums b
+    WHERE b.n <= SQRT(a.n)
+      AND a.n % b.n = 0
+);
 
 ```
 
