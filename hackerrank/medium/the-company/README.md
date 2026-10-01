@@ -1,4 +1,4 @@
-# Binary Tree Nodes
+# Print Prime Numbers
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -39,27 +39,30 @@ The following tables contain company data:
 
 ## Solution
 
-**Language:** db2  
+**Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-01T14:12:06.661Z  
+**Submitted:** 2026-10-01T14:37:59.469Z  
 
-```db2
-
+```sql
 /*
-    Enter your query here and follow these instructions:
-    1. Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
-    2. The AS keyword causes errors, so follow this convention: "Select t.Field From table1 t" instead of "select t.Field From table1 AS t"
-    3. Type your code immediately after comment. Don't leave any blank line.
+Enter your query here.
 */
-SELECT N,
-CASE 
-    When P IS NULL THEN 'Root'
-    WHEN N IN (SELECT P FROM BST) THEN 'Inner'
-    ELSE 'Leaf'
-END
-FROM BST
-ORDER BY N ASC;
+WITH RECURSIVE nums AS (
+    SELECT 2 AS n
+    UNION ALL
+    SELECT n + 1
+    FROM nums
+    WHERE n < 1000
+)
+SELECT GROUP_CONCAT(n SEPARATOR '&')
+FROM nums a
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM nums b
+    WHERE b.n <= SQRT(a.n)
+      AND a.n % b.n = 0
+);
 
 ```
 
