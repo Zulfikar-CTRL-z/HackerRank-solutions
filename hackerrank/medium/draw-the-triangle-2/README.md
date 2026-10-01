@@ -1,4 +1,4 @@
-# Draw The Triangle 1
+# Draw The Triangle 2
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -30,13 +30,13 @@ Write a query to print the pattern _P(20)_.
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-01T14:29:28.153Z  
+**Submitted:** 2026-10-01T14:34:41.059Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT REPEAT('* ', 21 - n)
+SELECT REPEAT('* ', n)
 FROM (
     SELECT 1 AS n
     UNION ALL SELECT 2
