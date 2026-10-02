@@ -1,4 +1,4 @@
-# Occupations
+# New Companies
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -42,26 +42,19 @@ The following tables contain company data:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-02T16:20:11.761Z  
+**Submitted:** 2026-10-02T16:21:55.141Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT 
-    MAX(CASE WHEN Occupation = 'Doctor' THEN Name END) AS Doctor,
-    MAX(CASE WHEN Occupation = 'Professor' THEN Name END) AS Professor,
-    MAX(CASE WHEN Occupation = 'Singer' THEN Name END) AS Singer,
-    MAX(CASE WHEN Occupation = 'Actor' THEN Name END) AS Actor
-FROM (
-    SELECT 
-        Name, 
-        Occupation, 
-        ROW_NUMBER() OVER (PARTITION BY Occupation ORDER BY Name) AS row_num
-    FROM OCCUPATIONS
-) AS RankedOccupations
-GROUP BY row_num
-ORDER BY row_num;
+SELECT c.Company_Code, c.founder, count(Distinct e.Lead_Manager_Code),
+
+count(distinct e.Senior_Manager_Code), count(distinct e.Manager_Code),
+
+count(distinct e.employee_Code) FROM Company c
+
+JOIN Employee e ON c.Company_Code = e.Company_Code GROUP BY c.Company_Code, c.Founder ORDER BY c.COMpany_Code;
 
 ```
 
