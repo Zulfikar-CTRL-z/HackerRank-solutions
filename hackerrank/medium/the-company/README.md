@@ -1,4 +1,4 @@
-# Print Prime Numbers
+# Occupations
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -42,27 +42,26 @@ The following tables contain company data:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-01T14:37:59.469Z  
+**Submitted:** 2026-10-02T16:20:11.761Z  
 
 ```sql
 /*
 Enter your query here.
 */
-WITH RECURSIVE nums AS (
-    SELECT 2 AS n
-    UNION ALL
-    SELECT n + 1
-    FROM nums
-    WHERE n < 1000
-)
-SELECT GROUP_CONCAT(n SEPARATOR '&')
-FROM nums a
-WHERE NOT EXISTS (
-    SELECT 1
-    FROM nums b
-    WHERE b.n <= SQRT(a.n)
-      AND a.n % b.n = 0
-);
+SELECT 
+    MAX(CASE WHEN Occupation = 'Doctor' THEN Name END) AS Doctor,
+    MAX(CASE WHEN Occupation = 'Professor' THEN Name END) AS Professor,
+    MAX(CASE WHEN Occupation = 'Singer' THEN Name END) AS Singer,
+    MAX(CASE WHEN Occupation = 'Actor' THEN Name END) AS Actor
+FROM (
+    SELECT 
+        Name, 
+        Occupation, 
+        ROW_NUMBER() OVER (PARTITION BY Occupation ORDER BY Name) AS row_num
+    FROM OCCUPATIONS
+) AS RankedOccupations
+GROUP BY row_num
+ORDER BY row_num;
 
 ```
 
