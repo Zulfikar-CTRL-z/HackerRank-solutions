@@ -1,4 +1,4 @@
-# Weather Observation Station 20
+# Top Competitors
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -33,20 +33,18 @@ The following tables contain contest data:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-01T14:25:46.694Z  
+**Submitted:** 2026-10-03T13:27:09.699Z  
 
 ```sql
-/*
-Enter your query here.
-*/
-WITH Numbered AS (
-  SELECT LAT_N, ROW_NUMBER() OVER (ORDER BY LAT_N) AS rn,
-         COUNT(*) OVER () AS total
-  FROM STATION
-)
-SELECT ROUND(AVG(LAT_N), 4) AS median
-FROM Numbered
-WHERE rn IN (FLOOR((total + 1) / 2.0), CEIL((total + 1) / 2.0));
+SELECT h.hacker_id, h.name 
+FROM Submissions s
+JOIN Hackers h ON s.hacker_id = h.hacker_id
+JOIN Challenges c ON s.challenge_id = c.challenge_id
+JOIN Difficulty d ON c.difficulty_level = d.difficulty_level
+WHERE s.score = d.score
+GROUP BY h.hacker_id, h.name
+HAVING COUNT(s.challenge_id) > 1
+ORDER BY COUNT(s.challenge_id) DESC, h.hacker_id ASC;
 
 ```
 
