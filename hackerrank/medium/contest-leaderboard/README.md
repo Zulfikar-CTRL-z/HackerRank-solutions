@@ -1,4 +1,4 @@
-# Challenges
+# Contest Leaderboard
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -28,30 +28,20 @@ The following tables contain contest data:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-04T13:54:31.486Z  
+**Submitted:** 2026-10-04T13:55:26.191Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT c.hacker_id, h.name, COUNT(c.challenge_id) AS cnt 
-FROM Hackers AS h 
-JOIN Challenges AS c ON h.hacker_id = c.hacker_id 
-GROUP BY c.hacker_id, h.name 
-HAVING cnt = (
-    SELECT COUNT(c1.challenge_id) 
-    FROM Challenges AS c1 
-    GROUP BY c1.hacker_id 
-    ORDER BY COUNT(*) DESC 
-    LIMIT 1
-) 
-OR cnt NOT IN (
-    SELECT COUNT(c2.challenge_id) 
-    FROM Challenges AS c2 
-    GROUP BY c2.hacker_id 
-    HAVING c2.hacker_id <> c.hacker_id
-) 
-ORDER BY cnt DESC, c.hacker_id;
+select m.hacker_id, h.name, sum(score) as total_score from
+(select hacker_id, challenge_id, max(score) as score
+from Submissions group by hacker_id, challenge_id) as m
+join Hackers as h
+on m.hacker_id = h.hacker_id
+group by m.hacker_id, h.name
+having total_score > 0
+order by total_score desc, m.hacker_id;
 
 ```
 
