@@ -4,24 +4,22 @@
 
 ## Problem
 
-_Description not available._
+Rectify the errors to make the program compile successfully
+
+### Expected output
+
+$12$
 
 ## Solution
 
 **Language:** Python  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-06T16:21:49.249Z  
+**Submitted:** 2026-10-06T16:22:08.305Z  
 
 ```py
-# Debug and fix the code
-n = int(input())
-
-if n % 2 == 0:
-    print("true")
-else:
-    print("false")
-
+a=4+8
+print(a)
 ```
 
 ---
