@@ -1,4 +1,4 @@
-# SQL Project Planning
+# Placements
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -61,19 +61,19 @@ The name output, when ordered by the salary offered to their friends, will be:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-05T14:02:56.446Z  
+**Submitted:** 2026-10-06T14:03:00.703Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT Start_Date, min(End_Date)
-FROM 
- (SELECT Start_Date FROM Projects WHERE Start_Date NOT IN (SELECT End_Date FROM Projects)) a ,
- (SELECT End_Date FROM Projects WHERE End_Date NOT IN (SELECT Start_Date FROM Projects)) b
-WHERE Start_Date < End_Date
-GROUP BY Start_Date
-ORDER BY DATEDIFF(min(End_Date), Start_Date) ASC, Start_Date ASC;
+SELECT s.Name 
+FROM Students s 
+JOIN Packages p1 ON s.ID = p1.ID 
+JOIN Friends f ON s.ID = f.ID 
+JOIN Packages p2 ON f.Friend_ID = p2.ID 
+WHERE p2.Salary > p1.Salary 
+ORDER BY p2.Salary;
 
 ```
 
