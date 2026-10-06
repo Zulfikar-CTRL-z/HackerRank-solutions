@@ -1,9 +1,10 @@
 /*
 Enter your query here.
 */
-SELECT f1.X, f1.Y 
-FROM Functions f1
-JOIN Functions f2 ON f1.X = f2.Y AND f1.Y = f2.X
-GROUP BY f1.X, f1.Y
-HAVING f1.X < f1.Y OR COUNT(*) > 1
-ORDER BY f1.X;
+SELECT s.Name 
+FROM Students s 
+JOIN Packages p1 ON s.ID = p1.ID 
+JOIN Friends f ON s.ID = f.ID 
+JOIN Packages p2 ON f.Friend_ID = p2.ID 
+WHERE p2.Salary > p1.Salary 
+ORDER BY p2.Salary;
