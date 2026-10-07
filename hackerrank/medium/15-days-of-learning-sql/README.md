@@ -1,4 +1,4 @@
-# 15 Days of Learning SQL
+# Interviews
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
 
@@ -29,44 +29,32 @@ The following tables hold contest data:
 **Language:** SQL  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-10-07T17:04:44.877Z  
+**Submitted:** 2026-10-07T17:03:16.660Z  
 
 ```sql
 /*
 Enter your query here.
 */
-SELECT 
-    SUBMISSION_DATE,
-    (
-        SELECT COUNT(DISTINCT HACKER_ID)  
-        FROM SUBMISSIONS S2  
-        WHERE S2.SUBMISSION_DATE = S1.SUBMISSION_DATE AND    
-            (
-                SELECT COUNT(DISTINCT S3.SUBMISSION_DATE) 
-                FROM SUBMISSIONS S3 
-                WHERE S3.HACKER_ID = S2.HACKER_ID AND S3.SUBMISSION_DATE < S1.SUBMISSION_DATE
-            ) = DATEDIFF(S1.SUBMISSION_DATE, '2016-03-01')
-    ) AS COUNT_HACKERS,
-    (
-        SELECT HACKER_ID 
-        FROM SUBMISSIONS S2 
-        WHERE S2.SUBMISSION_DATE = S1.SUBMISSION_DATE 
-        GROUP BY HACKER_ID 
-        ORDER BY COUNT(SUBMISSION_ID) DESC, HACKER_ID 
-        LIMIT 1
-    ) AS TMP,
-    (
-        SELECT NAME 
-        FROM HACKERS 
-        WHERE HACKER_ID = TMP
-    ) AS HACKER_NAME
-FROM
-    (
-        SELECT DISTINCT SUBMISSION_DATE 
-        FROM SUBMISSIONS
-    ) S1
-GROUP BY 
-    SUBMISSION_DATE;
+SELECT con.contest_id, con.hacker_id, con.name, SUM(sg.total_submissions), SUM(sg.total_accepted_submissions),
+SUM(vg.total_views), SUM(vg.total_unique_views)
+FROM Contests AS con 
+JOIN Colleges AS col
+ON con.contest_id = col.contest_id
+JOIN Challenges AS cha 
+ON cha.college_id = col.college_id
+LEFT JOIN
+(SELECT ss.challenge_id, SUM(ss.total_submissions) AS total_submissions, SUM(ss.total_accepted_submissions) AS total_accepted_submissions FROM 
+Submission_Stats AS ss GROUP BY ss.challenge_id) AS sg
+ON cha.challenge_id = sg.challenge_id
+LEFT JOIN
+(SELECT vs.challenge_id, SUM(vs.total_views) AS total_views, SUM(total_unique_views) AS total_unique_views FROM View_Stats AS vs GROUP BY vs.challenge_id) AS vg
+ON cha.challenge_id = vg.challenge_id
+GROUP BY con.contest_id, con.hacker_id, con.name
+HAVING SUM(sg.total_submissions)+
+       SUM(sg.total_accepted_submissions)+
+       SUM(vg.total_views)+
+       SUM(vg.total_unique_views) > 0
+ORDER BY con.contest_id;
 
 ```
 
